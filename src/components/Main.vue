@@ -32,7 +32,7 @@
               <v-card flat>
                 <v-card-text>Quadro Dimensionamento SESMT ANEXO I</v-card-text>
                 <v-autocomplete v-model="cnaeSelecionado" :items="listaCnaes" outlined chips color="blue-grey lighten-2"
-                  label="Cnaes" item-text="codigos" item-value="denominacao">
+                  label="Cnaes" item-text="codigos" return-object>
                   <template v-slot:selection="data">
                     <v-chip v-bind="data.attrs" :input-value="data.selected" @click="data.select">
                       <v-avatar left>
@@ -62,13 +62,12 @@
                   outlined
                   v-model="numeroFuncionarios"
                   :disabled="!cnaeSelecionado"
-                  @change="atualizaEnquadramento"
                 ></v-text-field>
-                <v-btn block @click="atualizar = true">
+                <v-btn block @click="atualizaEnquadramento">
                   Consultar
                 </v-btn>
                 <div v-if="atualizar">
-                  <h1>Enquadramento</h1>
+                  <h1>Enquadramento Grau {{ cnaeSelecionado.gr }}</h1>
                   <h2>Téc de Seg Trabalho - {{ enquadramento.tecSegTrabalho  }}</h2>
                   <h2>Eng de Seg Trabalho - {{ enquadramento.engSegTrabalho }}</h2>
                   <h2>Aux. Enfermagem Trabalho - {{ enquadramento.auxEnfermagemTrabalho }}</h2>
@@ -122,7 +121,28 @@ import quadroDimensionamento from '../dictionary/quadroDimensionamento'
     }),
     methods: {
       atualizaEnquadramento () {
-        console.log('atualiza')
+        this.atualizar = true;
+        var ar = this.listaQuadroDimensionamento[this.cnaeSelecionado.gr];
+        if(this.numeroFuncionarios < 50 ){
+          this.enquadramento = ar[50];
+        } else if (this.numeroFuncionarios < 100 ){
+          this.enquadramento = ar[100];
+        }else if (this.numeroFuncionarios < 250 ){
+          this.enquadramento = ar[250];
+        } else if (this.numeroFuncionarios < 500 ){
+          this.enquadramento = ar[500];
+        } else if (this.numeroFuncionarios < 1000 ){
+          this.enquadramento = ar[100];
+        } else if (this.numeroFuncionarios < 2000 ){
+          this.enquadramento = ar[2000];
+        } else if (this.numeroFuncionarios < 3500 ){
+          this.enquadramento = ar[3500];
+        } else if (this.numeroFuncionarios < 5000 ){
+          this.enquadramento = ar[5000];
+        } else {
+          this.enquadramento = ar[9999];
+        }
+        
       }
     }
   }
