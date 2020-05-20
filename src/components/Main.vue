@@ -31,28 +31,15 @@
             <v-tab-item>
               <v-card flat>
                 <v-card-text>Quadro Dimensionamento SESMT ANEXO I</v-card-text>
-                <v-autocomplete
-                    v-model="cnaeSelecionado"
-                    :items="listaCnaes"
-                    filled
-                    chips
-                    color="blue-grey lighten-2"
-                    label="Cnaes"
-                    item-text="codigos"
-                    item-value="codigos"
-                >
+                <v-autocomplete v-model="cnaeSelecionado" :items="listaCnaes" outlined chips color="blue-grey lighten-2"
+                  label="Cnaes" item-text="codigos" item-value="denominacao">
                   <template v-slot:selection="data">
-                    <v-chip
-                      v-bind="data.attrs"
-                      :input-value="data.selected"
-                      close
-                      @click="data.select"
-                      @click:close="remove(data.item)"
-                    >
+                    <v-chip v-bind="data.attrs" :input-value="data.selected" close @click="data.select"
+                      @click:close="remove(data.item)">
                       <v-avatar left>
                         <v-img :src="data.item.avatar"></v-img>
                       </v-avatar>
-                      {{ data.item.codigos }}
+                      {{ data.item.codigos }} - {{ data.item.denominacao }}    <b>Grau de Risco:</b> {{ data.item.gr }}
                     </v-chip>
                   </template>
                   <template v-slot:item="data">
@@ -71,6 +58,11 @@
                   </template>
                 </v-autocomplete>
 
+                <v-text-field
+                  label="Número de funcionários"
+                  outlined
+                  v-model="numeroFuncionarios"
+                ></v-text-field>
               </v-card>
             </v-tab-item>
             <v-tab-item>
@@ -101,6 +93,7 @@ import cnaes from '../dictionary/cnaes'
         4: '../assets/1.jpg',
         5: '../assets/1.jpg',
       },
+      numeroFuncionarios: 0,
       listaCnaes: cnaes,
       tab: 0,
       cnaeSelecionado: ''
