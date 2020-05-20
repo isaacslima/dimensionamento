@@ -9,6 +9,8 @@
           alt="CIPA"
           class="shrink mt-1 hidden-sm-and-down"
           contain
+          max-width="auto"
+          max-height="50"
           src="./assets/logo.jpg"
         />
         
