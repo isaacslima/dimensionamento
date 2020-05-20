@@ -31,10 +31,10 @@
             <v-tab-item>
               <v-card flat>
                 <v-card-text>Quadro Dimensionamento SESMT ANEXO I</v-card-text>
-                <v-autocomplete v-model="cnaeSelecionado" close :items="listaCnaes" outlined chips color="blue-grey lighten-2"
+                <v-autocomplete v-model="cnaeSelecionado" :items="listaCnaes" outlined chips color="blue-grey lighten-2"
                   label="Cnaes" item-text="codigos" item-value="denominacao">
                   <template v-slot:selection="data">
-                    <v-chip v-bind="data.attrs" :input-value="data.selected" close @click="data.select">
+                    <v-chip v-bind="data.attrs" :input-value="data.selected" @click="data.select">
                       <v-avatar left>
                         <v-img :src="data.item.avatar"></v-img>
                       </v-avatar>
@@ -62,14 +62,18 @@
                   outlined
                   v-model="numeroFuncionarios"
                   :disabled="!cnaeSelecionado"
+                  @change="atualizaEnquadramento"
                 ></v-text-field>
-                <div v-if="cnaeSelecionado">
+                <v-btn block @click="atualizar = true">
+                  Consultar
+                </v-btn>
+                <div v-if="atualizar">
                   <h1>Enquadramento</h1>
-                  <h2>Téc de Seg Trabalho - {{ tecSegTrabalho  }}</h2>
-                  <h2>Eng de Seg Trabalho - {{ engSegTrabalho }}</h2>
-                  <h2>Aux. Enfermagem Trabalho - {{ auxEnfermagemTrabalho }}</h2>
-                  <h2>Enfermeiro do Trabalho - {{ enfermeiroTrabalho }}</h2>
-                  <h2>Médico do Trabalho - {{ medicoTrabalho }}</h2>
+                  <h2>Téc de Seg Trabalho - {{ enquadramento.tecSegTrabalho  }}</h2>
+                  <h2>Eng de Seg Trabalho - {{ enquadramento.engSegTrabalho }}</h2>
+                  <h2>Aux. Enfermagem Trabalho - {{ enquadramento.auxEnfermagemTrabalho }}</h2>
+                  <h2>Enfermeiro do Trabalho - {{ enquadramento.enfermeiroTrabalho }}</h2>
+                  <h2>Médico do Trabalho - {{ enquadramento.medicoTrabalho }}</h2>
                 </div>
               </v-card>
             </v-tab-item>
@@ -103,10 +107,23 @@ import quadroDimensionamento from '../dictionary/quadroDimensionamento'
         5: '../assets/1.jpg',
       },
       numeroFuncionarios: 0,
+      atualizar: false,
+      enquadramento: {
+        tecSegTrabalho: 0,
+        engSegTrabalho: 0,
+        auxEnfermagemTrabalho: 0,
+        enfermeiroTrabalho: 0,
+        medicoTrabalho: 0
+      },
       listaQuadroDimensionamento: quadroDimensionamento,
       listaCnaes: cnaes,
       tab: 0,
       cnaeSelecionado: ''
     }),
+    methods: {
+      atualizaEnquadramento () {
+        console.log('atualiza')
+      }
+    }
   }
 </script>
