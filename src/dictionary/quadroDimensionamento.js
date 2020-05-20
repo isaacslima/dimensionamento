@@ -195,49 +195,49 @@ export default {
     }
   },
   4: {
-    ate50: {
+    50: {
       tecSegTrabalho: 0,
       engSegTrabalho: 0,
       auxEnfermagemTrabalho: 0,
       enfermeiroTrabalho: 0,
       medicoTrabalho: 0
     },
-    ate100: {
+    100: {
       tecSegTrabalho: 1,
       engSegTrabalho: 0,
       auxEnfermagemTrabalho: 0,
       enfermeiroTrabalho: 0,
       medicoTrabalho: 0
     },
-    ate250: {
+    250: {
       tecSegTrabalho: 2,
       engSegTrabalho: "1*",
       auxEnfermagemTrabalho: 0,
       enfermeiroTrabalho: 0,
       medicoTrabalho: "1*"
     },
-    ate500: {
+    500: {
       tecSegTrabalho: 3,
       engSegTrabalho: "1*",
       auxEnfermagemTrabalho: 0,
       enfermeiroTrabalho: 0,
       medicoTrabalho: "1*"
     },
-    ate1000: {
+    1000: {
       tecSegTrabalho: 4,
       engSegTrabalho: 1,
       auxEnfermagemTrabalho: 1,
       enfermeiroTrabalho: 0,
       medicoTrabalho: 1
     },
-    ate2000: {
+    2000: {
       tecSegTrabalho: 5,
       engSegTrabalho: 1,
       auxEnfermagemTrabalho: 1,
       enfermeiroTrabalho: 0,
       medicoTrabalho: 1
     },
-    ate3500: {
+    3500: {
       tecSegTrabalho: 8,
       engSegTrabalho: 2,
       auxEnfermagemTrabalho: 2,

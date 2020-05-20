@@ -31,11 +31,10 @@
             <v-tab-item>
               <v-card flat>
                 <v-card-text>Quadro Dimensionamento SESMT ANEXO I</v-card-text>
-                <v-autocomplete v-model="cnaeSelecionado" :items="listaCnaes" outlined chips color="blue-grey lighten-2"
+                <v-autocomplete v-model="cnaeSelecionado" close :items="listaCnaes" outlined chips color="blue-grey lighten-2"
                   label="Cnaes" item-text="codigos" item-value="denominacao">
                   <template v-slot:selection="data">
-                    <v-chip v-bind="data.attrs" :input-value="data.selected" close @click="data.select"
-                      @click:close="remove(data.item)">
+                    <v-chip v-bind="data.attrs" :input-value="data.selected" close @click="data.select">
                       <v-avatar left>
                         <v-img :src="data.item.avatar"></v-img>
                       </v-avatar>
@@ -62,7 +61,16 @@
                   label="Número de funcionários"
                   outlined
                   v-model="numeroFuncionarios"
+                  :disabled="!cnaeSelecionado"
                 ></v-text-field>
+                <div v-if="cnaeSelecionado">
+                  <h1>Enquadramento</h1>
+                  <h2>Téc de Seg Trabalho - {{ tecSegTrabalho  }}</h2>
+                  <h2>Eng de Seg Trabalho - {{ engSegTrabalho }}</h2>
+                  <h2>Aux. Enfermagem Trabalho - {{ auxEnfermagemTrabalho }}</h2>
+                  <h2>Enfermeiro do Trabalho - {{ enfermeiroTrabalho }}</h2>
+                  <h2>Médico do Trabalho - {{ medicoTrabalho }}</h2>
+                </div>
               </v-card>
             </v-tab-item>
             <v-tab-item>
@@ -81,6 +89,7 @@
 
 <script>
 import cnaes from '../dictionary/cnaes'
+import quadroDimensionamento from '../dictionary/quadroDimensionamento'
 
   export default {
     name: 'Main',
@@ -94,15 +103,10 @@ import cnaes from '../dictionary/cnaes'
         5: '../assets/1.jpg',
       },
       numeroFuncionarios: 0,
+      listaQuadroDimensionamento: quadroDimensionamento,
       listaCnaes: cnaes,
       tab: 0,
       cnaeSelecionado: ''
     }),
-    methods: {
-    remove (item) {
-      const index = this.friends.indexOf(item.name)
-      if (index >= 0) this.friends.splice(index, 1)
-    },
-  },
   }
 </script>
